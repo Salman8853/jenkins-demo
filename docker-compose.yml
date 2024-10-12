@@ -1,0 +1,8 @@
+version: '3'
+services:
+  jenkins-demo:
+    image: puddu6264/jenkins-demo:latest  # Replace with your Docker image name and tag
+    container_name: jenkins-demo-app
+    ports:
+      - "8081:8081"
+    restart: always
