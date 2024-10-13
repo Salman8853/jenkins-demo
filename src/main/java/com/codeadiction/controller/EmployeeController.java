@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/employee")
@@ -17,6 +19,13 @@ public class EmployeeController {
       public ResponseEntity<List<Employee>>getEmployee(){
           return new ResponseEntity<>(employees, HttpStatus.OK);
       }
+
+
+    @GetMapping("by-department/")
+    public ResponseEntity<Map<String,List<Employee>>>getEmployeeByDepartment(){
+        Map<String,List<Employee>> employeeDepartmentwise=  employees.stream().collect(Collectors.groupingBy(Employee::getDepartment));
+        return new ResponseEntity<>(employeeDepartmentwise, HttpStatus.OK);
+    }
     static List<Employee> employees;
 
     static {
