@@ -30,10 +30,12 @@ public class EmployeeController {
 
     static {
         employees = List.of(
+                
                 new Employee(1, "John Doe", 55000.0, "IT"),
                 new Employee(2, "Jane Smith", 62000.0, "HR"),
                 new Employee(3, "Michael Brown", 48000.0, "Finance"),
-                new Employee(4, "Emily White", 51000.0, "Marketing")
+                new Employee(4, "Emily White", 51000.0, "Marketing"),
+                new Employee(5, "Mohd Salman", 65000.0, "IT")
         );
 
     }
