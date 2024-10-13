@@ -4,11 +4,13 @@ import com.codeadiction.model.Employee;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -21,10 +23,16 @@ public class EmployeeController {
       }
 
 
-    @GetMapping("by-department/")
+    @GetMapping("/by-department")
     public ResponseEntity<Map<String,List<Employee>>>getEmployeeByDepartment(){
         Map<String,List<Employee>> employeeDepartmentwise=  employees.stream().collect(Collectors.groupingBy(Employee::getDepartment));
         return new ResponseEntity<>(employeeDepartmentwise, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Employee>>getEmployeeById(@PathVariable Integer id ){
+        Optional<Employee> employee = employees.stream().filter(emp -> emp.getId().equals(id)).findFirst();
+        return new ResponseEntity<>(employee, HttpStatus.OK);
     }
     static List<Employee> employees;
 
